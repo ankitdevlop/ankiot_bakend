@@ -24,6 +24,7 @@ app.post('/send-email', (req, res) => {
     const mailOptions = {
       from: 'ankitdubey58825@gmail.com', 
       to: email,
+      cc: 'ankitdubey58825@gmail.com' ,  
       subject: 'no replay ', 
       text: `Thank you ${name} for showing interest. I will contact you shortly.` 
     };
