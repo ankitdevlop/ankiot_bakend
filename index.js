@@ -39,6 +39,32 @@ app.post('/send-email', (req, res) => {
       }
     });
   });
+
+  app.post('/receive-message', (req, res) => {
+    const { email, name, message } = req.body;
+
+    // Log the message details to the console
+    console.log(`Received message from ${name} (${email}): ${message}`);
+
+    // Send email notification
+    const mailOptions = {
+        from: 'ankitdubey58825@gmail.com',
+        to: 'ankitdubey58825@gmail.com',
+        subject: 'New message received',
+        text: `New message received from ${name} (${email}): ${message}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email notification:', error);
+        } else {
+            console.log('Email notification sent successfully:', info.response);
+        }
+    });
+
+    // Optionally, you can send a response back to the client
+    res.status(200).send('Message received successfully');
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
